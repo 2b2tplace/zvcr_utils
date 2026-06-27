@@ -4,7 +4,7 @@
 
 namespace zvcr {
 
-    CommandLine::CommandLine(const int argc, const char **argv, std::ostream &out, const bool enableLogPrefix): logger(out), enableLogPrefix(enableLogPrefix) {
+    CommandLine::CommandLine(const int argc, const char **argv, std::ostream &out, const bool enableLogPrefix): logger(out, enableLogPrefix) {
         parser.parse(argc, argv);
         commands.push_back(std::make_unique<HelpCommand>());
     }
@@ -12,7 +12,7 @@ namespace zvcr {
     CommandLine::CommandLine(const int argc, const char **argv, const bool enableLogPrefix): CommandLine(argc, argv, std::cout, enableLogPrefix) {}
 
     CommandLine::CommandLine(const int argc, const char **argv): CommandLine(argc, argv, std::cout, false) {
-        enableLogPrefix = parser.flag("enable-log-prefix");
+        logger.enableLogPrefix = parser.flag("enable-log-prefix");
     }
 
     auto CommandLine::execute() const -> bool {
