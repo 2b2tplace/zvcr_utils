@@ -38,12 +38,12 @@ namespace zvcr {
         std::fill_n(bar.begin(), fill, '=');
         if (fill > 0 && fill < width) bar[fill] = '>';
 
-        logger.print(fmt::format("[{}] {:.2f}% ({} / {}); Elapsed: {}, Remaining: {}",
+        logger.logInline<L>(false, "[{}] {:.2f}% ({} / {}); Elapsed: {}, Remaining: {}",
             bar, progress.percentage() * 100,
             progress.current.load(), progress.total,
             formatDuration(std::chrono::duration_cast<std::chrono::seconds>(progress.elapsed())),
             formatRemainingETA(progress)
-        ), mc::logLevelToColor(mc::INFO));
+        );
     }
 
     using ProgressPrinter = std::function<auto(mc::Logger&, const Progress&) -> void>;
