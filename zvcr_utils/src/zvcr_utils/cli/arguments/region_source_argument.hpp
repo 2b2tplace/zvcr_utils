@@ -27,7 +27,7 @@ namespace zvcr {
 
         [[nodiscard]]
         auto parseAsSource(const ArgumentParser &parser, const std::vector<fs::path> &rootDirs,
-                           const std::string &extension) const -> ResultMessage<std::unique_ptr<RegionSource>>;
+                           std::string_view extension) const -> ResultMessage<std::unique_ptr<RegionSource>>;
 
         [[nodiscard]]
         static auto create() -> RegionSourceArgument;

@@ -44,13 +44,13 @@ namespace zvcr {
     }
 
     auto RegionSourceArgument::parseAsSource(const ArgumentParser &parser, const std::vector<fs::path> &rootDirs,
-                                             const std::string &extension) const -> ResultMessage<std::unique_ptr<RegionSource>> {
+                                             const std::string_view extension) const -> ResultMessage<std::unique_ptr<RegionSource>> {
         const auto parsed = TRY(parseAll(parser));
         if (!parsed.empty())
             return std::make_unique<RegionRectVector>(parsed);
 
         if (rootDirs.empty())
-            return ERR("Invalid region source provided");
+            return ERR("No region source paths were provided.");
 
         return std::make_unique<RegionMultiDirectory>(rootDirs, extension);
     }
