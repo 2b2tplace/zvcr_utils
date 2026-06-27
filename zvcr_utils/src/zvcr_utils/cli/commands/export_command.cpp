@@ -6,6 +6,7 @@
 #include <zvcr_utils/util/io_utils.hpp>
 #include <zvcr/io/file_location.hpp>
 #include <zvcr/io/serialize/deserialize.hpp>
+#include <zvcr_utils/util/registry_wrapper.hpp>
 
 namespace zvcr {
 
@@ -20,13 +21,13 @@ namespace zvcr {
         auto sourcesResult = inputsArg.parseAsSource(args, sourcePaths, extension);
         if (!sourcesResult) return ERR(sourcesResult.error());
 
-        const auto &sources = *sourcesResult->get();
+        const auto &sources = **sourcesResult;
         const auto &outPath = TRY(outArg.get(args));
         const auto threads = TRY(threadsArg.get(args));
         const auto epoch = TRY(epochArg.get(args));
 
         cli.log<mc::INFO>("Exporting regions in dimension {} from {} sources at epoch {}", dimensionName(dimensionType), sourcePaths.size(), epoch);
-        cli.log<mc::INFO>("Sources:");
+        cli.log<mc::INFO>("Sources (zvcr):");
         for (const auto &path : sourcePaths) {
             cli.log<mc::INFO>("- {}", path.string());
         }
