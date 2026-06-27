@@ -3,6 +3,7 @@
 #include <zvcr_utils/cli/commands/help_command.hpp>
 #include <zvcr_utils/cli/commands/merge_command.hpp>
 #include <zvcr_utils/cli/commands/export_command.hpp>
+#include <zvcr_utils/cli/commands/level_dat_command.hpp>
 
 namespace zvcr {
 
@@ -11,6 +12,7 @@ namespace zvcr {
         commands.push_back(std::make_unique<HelpCommand>());
         commands.push_back(std::make_unique<MergeCommand>());
         commands.push_back(std::make_unique<ExportCommand>());
+        commands.push_back(std::make_unique<LevelDatCommand>());
     }
 
     CommandLine::CommandLine(const int argc, const char **argv, const bool enableLogPrefix): CommandLine(argc, argv, std::cout, enableLogPrefix) {}
