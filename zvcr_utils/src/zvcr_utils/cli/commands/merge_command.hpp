@@ -28,7 +28,6 @@ namespace zvcr {
         GenericArgument<int> zstdLevelArg = argument(zstdCompressionLevelArgument());
         GenericArgument<uint> zstdThreadsArg = argument(zstdCompressionThreadsArgument());
         GenericArgument<size_t> threadsArg = argument(threadsArgument());
-        FilepathArgument registriesArg = argument(FilepathArgument::registries());
         FlagArgument backupExistingArg = argument(backupExistingArgument());
     };
 }
