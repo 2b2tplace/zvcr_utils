@@ -1,12 +1,14 @@
 #include <iostream>
 #include <zvcr_utils/cli/command_line.hpp>
 #include <zvcr_utils/cli/commands/help_command.hpp>
+#include <zvcr_utils/cli/commands/merge_command.hpp>
 
 namespace zvcr {
 
     CommandLine::CommandLine(const int argc, const char **argv, std::ostream &out, const bool enableLogPrefix): logger(out, enableLogPrefix) {
         parser.parse(argc, argv);
         commands.push_back(std::make_unique<HelpCommand>());
+        commands.push_back(std::make_unique<MergeCommand>());
     }
 
     CommandLine::CommandLine(const int argc, const char **argv, const bool enableLogPrefix): CommandLine(argc, argv, std::cout, enableLogPrefix) {}
