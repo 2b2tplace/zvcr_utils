@@ -19,7 +19,7 @@ FetchContent_MakeAvailable(zvcr)
 
 FetchContent_Declare(mc_cpp
         GIT_REPOSITORY git@github.com:2b2tplace/mc-cpp.git
-        GIT_TAG        0.1.12.8
+        GIT_TAG        0.1.13.0
         GIT_PROGRESS TRUE
         GIT_SHALLOW TRUE
 )
