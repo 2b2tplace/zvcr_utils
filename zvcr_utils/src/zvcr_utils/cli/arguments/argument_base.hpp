@@ -82,7 +82,7 @@ namespace zvcr {
             if (options.defaultSupplier)
                 return (*options.defaultSupplier)();
 
-            return ERR(fmt::format("Invalid argument '{}'. Usage: {}", options.name, usage()));
+            return ERR(fmt::format("Missing argument '{}'. Usage: {}", options.name, usage()));
         }
 
     private:
