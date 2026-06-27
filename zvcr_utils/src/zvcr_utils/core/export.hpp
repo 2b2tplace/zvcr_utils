@@ -1,6 +1,5 @@
 #pragma once
 
-#include <zvcr_utils/util/registry_wrapper.hpp>
 #include <zvcr/region/segment.hpp>
 #include <mc_cpp/anvil/anvil_region.hpp>
 #include <mc_cpp/registry/minecraft.hpp>
