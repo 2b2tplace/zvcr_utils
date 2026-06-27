@@ -1,4 +1,5 @@
 #include <zvcr_utils/core/export.hpp>
+#include <zvcr_utils/util/registry_wrapper.hpp>
 
 namespace zvcr {
 
