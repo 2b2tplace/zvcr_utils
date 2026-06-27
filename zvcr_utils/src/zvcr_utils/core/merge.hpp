@@ -3,7 +3,6 @@
 #include <memory>
 #include <vector>
 #include <absl/container/btree_map.h>
-#include <zvcr/region/segment_info.hpp>
 #include <zvcr/region/paletted_delta_data.hpp>
 #include <zvcr/io/file_type.hpp>
 
@@ -44,9 +43,6 @@ namespace zvcr {
             });
             if (blockSnapshotResult)
                 success = true;
-            else if (blockSnapshotResult.error() != DeltaInsertionStatus::NO_CHANGES_MADE) {
-                std::cerr << "Failed insertion: " << (int) blockSnapshotResult.error() << '\n';
-            }
         }
         return success;
 }
