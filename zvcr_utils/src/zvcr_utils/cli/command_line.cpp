@@ -46,6 +46,10 @@ namespace zvcr {
             }
             return true;
         }
+        if (!parser.arguments.empty()) {
+            log<mc::WARN>("Invalid command usage, arguments were ignored.");
+            return true;
+        }
         log<mc::INFO>("Use `{} -help` to see all available commands.", COMMAND);
         return true;
     }
