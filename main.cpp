@@ -1,4 +1,3 @@
-#include <iostream>
 #include <zvcr_utils/cli/command_line.hpp>
 
 int main(const int argc, const char **argv) {
