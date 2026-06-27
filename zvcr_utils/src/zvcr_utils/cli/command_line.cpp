@@ -32,6 +32,10 @@ namespace zvcr {
             try {
                 if (const auto result = command->execute(*this); !result) {
                     log<mc::ERROR>("{}", result.error());
+                    log<mc::ERROR>("Usage: ");
+                    for (const auto &line : command->explain()) {
+                        log<mc::ERROR>("{}", line);
+                    }
                     return false;
                 }
             } catch (const std::exception &e) {
