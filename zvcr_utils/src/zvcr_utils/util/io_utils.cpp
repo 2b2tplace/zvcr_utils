@@ -28,7 +28,7 @@ namespace zvcr {
     }
 
     auto writeFileSafely(const File &zvcrFile, const fs::path &parentDirectoryOut, const RegionLocation &location,
-        const bool backupExistingFiles, const int compressionLevel, const uint compressionThreads) -> ErrorMessage {
+                         const bool backupExistingFiles, const int compressionLevel, const uint compressionThreads) -> ErrorMessage {
         return writeFileSafely(location.filePath(parentDirectoryOut), backupExistingFiles, [&](const fs::path &path) -> ErrorMessage {
             TRY(writeFile(zvcrFile, path, compressionLevel, compressionThreads));
             return {};
