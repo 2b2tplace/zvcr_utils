@@ -30,7 +30,7 @@ namespace zvcr {
         for (const auto &path : sourcePaths) {
             cli.log<mc::INFO>("- {}", path.string());
         }
-        cli.log<mc::INFO>("Destination (mca):  {}", outPath.string());
+        cli.log<mc::INFO>("Destination (mca): {}", outPath.string());
         cli.log<mc::INFO>("Using {} threads to export {} region files", threads, sources.size());
 
         const auto t0 = std::chrono::steady_clock::now();
