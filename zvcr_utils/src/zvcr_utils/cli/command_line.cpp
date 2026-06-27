@@ -2,6 +2,7 @@
 #include <zvcr_utils/cli/command_line.hpp>
 #include <zvcr_utils/cli/commands/help_command.hpp>
 #include <zvcr_utils/cli/commands/merge_command.hpp>
+#include <zvcr_utils/cli/commands/export_command.hpp>
 
 namespace zvcr {
 
@@ -9,6 +10,7 @@ namespace zvcr {
         parser.parse(argc, argv);
         commands.push_back(std::make_unique<HelpCommand>());
         commands.push_back(std::make_unique<MergeCommand>());
+        commands.push_back(std::make_unique<ExportCommand>());
     }
 
     CommandLine::CommandLine(const int argc, const char **argv, const bool enableLogPrefix): CommandLine(argc, argv, std::cout, enableLogPrefix) {}
