@@ -13,7 +13,6 @@ namespace zvcr {
     struct CommandLine {
         ArgumentParser parser;
         mutable mc::Logger logger;
-        bool enableLogPrefix;
         std::vector<std::unique_ptr<Command>> commands;
 
         explicit CommandLine(int argc, const char **argv, std::ostream &out, bool enableLogPrefix);
@@ -27,14 +26,7 @@ namespace zvcr {
 
         template<mc::LogLevel L, typename... T>
         auto log(fmt::format_string<T...> fmt, T &&... args) const -> void {
-#ifndef DEBUG_MODE
-            if constexpr (L == DEBUG) return;
-#endif
-            if (!enableLogPrefix) {
-                logger.println(fmt::format(fmt, std::forward<T>(args)...), logLevelToColor(L));
-            } else {
-                logger.log<L>(fmt, std::forward<T>(args)...);
-            }
+            logger.log<L>(fmt, std::forward<T>(args)...);
         }
     };
 
