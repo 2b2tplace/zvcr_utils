@@ -305,7 +305,7 @@ namespace zvcr {
     }
 
     auto RegionGrid::end() const -> WrappedRegionIterator {
-        return WrappedRegionIterator{std::make_unique<RegionRectIterator>(scanRect, scanRect.minX, scanRect.maxZ)};
+        return WrappedRegionIterator{std::make_unique<RegionRectIterator>(scanRect, scanRect.maxX, scanRect.minZ)};
     }
 
     auto RegionGrid::size() const -> size_t {
