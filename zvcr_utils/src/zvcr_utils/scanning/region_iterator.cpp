@@ -25,10 +25,10 @@ namespace zvcr {
     }
 
     auto RegionRectIterator::operator++() -> void {
-        ++rx;
-        if (rx >= scanRect.maxX) {
-            rx = scanRect.minX;
-            ++rz;
+        ++rz;
+        if (rz >= scanRect.maxZ) {
+            rz = scanRect.minZ;
+            ++rx;
         }
     }
 
