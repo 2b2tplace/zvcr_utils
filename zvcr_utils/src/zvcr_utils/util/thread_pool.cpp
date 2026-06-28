@@ -1,7 +1,7 @@
 #include <zvcr_utils/util/thread_pool.hpp>
 
 namespace zvcr {
-    void ThreadPool::init(const size_t threads) {
+    auto ThreadPool::init(const size_t threads) -> void {
         for (size_t i = 0; i < threads; i++) {
             workers.emplace_back([this] {
                 for (;;) {
@@ -21,7 +21,7 @@ namespace zvcr {
         }
     }
 
-    void ThreadPool::shutdown() {
+    auto ThreadPool::shutdown() -> void {
         if (stop) return;
         {
             std::unique_lock lock(queueMutex);
@@ -32,15 +32,16 @@ namespace zvcr {
             worker.join();
     }
 
-    ThreadPool::ThreadPool(): stop(false) {
-        init(std::thread::hardware_concurrency());
-    }
+    ThreadPool::ThreadPool(): ThreadPool(std::thread::hardware_concurrency()) {}
 
-    ThreadPool::ThreadPool(const size_t threads): stop(false) {
+    ThreadPool::ThreadPool(const size_t threads): ThreadPool(threads, 16384) {}
+
+    ThreadPool::ThreadPool(const size_t threads, const size_t maxQueueSize): slots(maxQueueSize), stop(false) {
         init(threads);
     }
 
-    size_t ThreadPool::queueSize() const {
+    auto ThreadPool::queueSize() const -> size_t {
+        std::unique_lock lock(queueMutex);
         return tasks.size();
     }
 
