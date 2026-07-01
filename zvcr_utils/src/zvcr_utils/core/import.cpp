@@ -59,7 +59,7 @@ namespace zvcr {
                 nbtBytes
             );
         }
-        segment->tileEntities.insertSnapshot(timestamp, tileEntities);
+        IGNORE(segment->tileEntities.insertSnapshot(timestamp, tileEntities));
         return segment;
     }
 
