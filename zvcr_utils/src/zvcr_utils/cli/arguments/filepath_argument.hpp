@@ -7,7 +7,7 @@ namespace zvcr {
 
     namespace fs = std::filesystem;
 
-    inline constexpr auto REGISTRIES_ENV_VAR = "PLUH_MINECRAFT_REGISTRIES_PATH";
+    inline constexpr auto REGISTRIES_ENV_VAR = "ZVCR_CLI_MINECRAFT_REGISTRIES_PATH";
 
     [[nodiscard]]
     auto registriesEnvVar() -> result::Option<std::string>;
