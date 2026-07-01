@@ -4,7 +4,8 @@ A collection of helpful utilities related to the [zvcr file format](https://gith
 line program.
 
 # Command Usage
-The `zvcr` CLI accepts parameters in sequence, denoted by a `-` prefix: `zvcr -flag -arg1=value1 -arg2=value2`
+The `zvcr` CLI accepts parameters in sequence, denoted by a `-` prefix: \
+`zvcr -flag -arg1=value1 -arg2=value2`
 
 Basic parameter syntax: \
 `-parameter=value` \
