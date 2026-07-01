@@ -35,9 +35,9 @@ variadic parameters are denoted with `[...]`: `-parameters=values[...]` (example
     - `-in='/path/to/input-zvcr-dirs'[...]`
     - `-out='/path/to/output-zvcr-dir'`
     - `[-inputs=x.z or min_x.min_z,max_x.max_z[...] (defaults to all region files in the input directories)]`
-    - `[-zstd-level=zstd compression level] (defaults to 8)`
-    - `[-zstd-threads=zstd compression threads] (defaults to 16)`
-    - `[-threads=number of threads (defaults to number of threads on this system)] (defaults to 32)`
+    - `[-zstd-level=zstd compression level]`
+    - `[-zstd-threads=zstd compression threads]`
+    - `[-threads=number of threads (defaults to number of threads on this system)]`
     - `[-backup-existing]`
 
 ### Import
@@ -47,9 +47,9 @@ variadic parameters are denoted with `[...]`: `-parameters=values[...]` (example
     - `-out='/path/to/zvcr-files'`
     - `[-inputs=x.z or min_x.min_z,max_x.max_z[...] (defaults to all region files in the input directories)]`
     - `[-override-epoch=a unix timestamp (in seconds, to override the timestamp of all snapshots; defaults to the recorded timestamp of each chunk)]`
-    - `[-zstd-level=zstd compression level] (defaults to 8)`
-    - `[-zstd-threads=zstd compression threads] (defaults to 16)`
-    - `[-threads=number of threads (defaults to number of threads on this system)] (defaults to 32)`
+    - `[-zstd-level=zstd compression level]`
+    - `[-zstd-threads=zstd compression threads]`
+    - `[-threads=number of threads (defaults to number of threads on this system)]`
     - `[-backup-existing]`
     - `-reg='/path/to/registries' (defaults to value of ZVCR_CLI_MINECRAFT_REGISTRIES_PATH environment variable)`
 
@@ -60,7 +60,7 @@ variadic parameters are denoted with `[...]`: `-parameters=values[...]` (example
     - `-out='/path/to/minecraft-world-folder'`
     - `[-inputs=x.z or min_x.min_z,max_x.max_z[...] (defaults to all region files in the input directories)]`
     - `[-epoch=a unix timestamp (in seconds; defaults to current time)]`
-    - `[-threads=number of threads (defaults to number of threads on this system)] (defaults to 32)`
+    - `[-threads=number of threads (defaults to number of threads on this system)]`
     - `-reg='/path/to/registries' (defaults to value of ZVCR_CLI_MINECRAFT_REGISTRIES_PATH environment variable)`
 
 ### Level-dat
