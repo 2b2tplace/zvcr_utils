@@ -26,10 +26,10 @@ namespace zvcr {
     };
 
     [[nodiscard]]
-    auto formatDuration(std::chrono::seconds secs) -> std::string ;
+    auto formatDuration(std::chrono::seconds secs) -> std::string;
 
     [[nodiscard]]
-    auto formatRemainingETA(const Progress &progress) -> std::string ;
+    auto formatRemainingETA(const Progress &progress) -> std::string;
 
     template<mc::LogLevel L, size_t width>
     auto defaultProgressPrinter(mc::Logger &logger, const Progress &progress) -> void {
