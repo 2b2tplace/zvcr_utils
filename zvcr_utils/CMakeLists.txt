@@ -10,16 +10,16 @@ file(GLOB_RECURSE LIBS "src/*.hpp" "src/*.h" "src/*.cpp" "src/*.c")
 include(FetchContent)
 
 FetchContent_Declare(zvcr
-        GIT_REPOSITORY git@github.com:2b2tplace/zvcr.git
-        GIT_TAG        1.0.0.0
+        GIT_REPOSITORY https://github.com/2b2tplace/zvcr.git
+        GIT_TAG        1.0.0.2
         GIT_PROGRESS TRUE
         GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(zvcr)
 
 FetchContent_Declare(mc_cpp
-        GIT_REPOSITORY git@github.com:2b2tplace/mc-cpp.git
-        GIT_TAG        0.1.13.0
+        GIT_REPOSITORY https://github.com/2b2tplace/mc-cpp.git
+        GIT_TAG        0.1.13.1
         GIT_PROGRESS TRUE
         GIT_SHALLOW TRUE
 )
