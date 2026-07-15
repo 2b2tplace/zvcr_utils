@@ -63,7 +63,10 @@ namespace zvcr {
                         }
                         found = true;
                         File file{.protocolVersion = static_cast<uint16_t>(registry.mc.protocolVersion()), .dimensionType = dimensionType};
-                        createZVCRRegion(registry.mc, dimensionType, region, file.region, overrideEpoch);
+                        if (const auto result = createZVCRRegion(registry.mc, dimensionType, region, file.region, overrideEpoch); !result) {
+                            cli.log<mc::ERROR>("\nFailed to import mca region file: {}", result.error());
+                            continue;
+                        }
                         writeFileSafelyLog(cli.logger, file, outPath, location, backupExisting, zstdLevel, zstdThreads);
                     }
                     progress.increment();

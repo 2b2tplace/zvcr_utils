@@ -4,7 +4,7 @@
 
 namespace zvcr {
     auto createZVCRSegment(const mc::MinecraftRegistry &registry, DimensionType dimensionType,
-                           const mc::NbtFile &chunkNBT, const time_t timestamp) -> std::shared_ptr<Segment> {
+                           const mc::NbtFile &chunkNBT, const time_t timestamp) -> ResultMessage<std::shared_ptr<Segment>> {
         auto status = chunkNBT.read<std::string>("Status");
         mc::stripMinecraftNamespace(&status);
         if (status != "full") return nullptr;
@@ -33,7 +33,20 @@ namespace zvcr {
             if (!tileEntityNBT || tileEntityNBT->getType() != mc::NbtType::COMPOUND) continue;
 
             auto &compound = dynamic_cast<mc::NbtCompound&>(*tileEntityNBT);
-            const auto type = registry.tileEntityId(compound.read<std::string>("id"));
+            if (!compound.contains<std::string>("id"))
+                return ERR(fmt::format("Invalid tile entity: Field 'id' is missing ({})", mc::stringifyNbt(compound)));
+
+            for (const auto &field : {"x", "y", "z"}) {
+                if (!compound.contains<int32_t>(field))
+                    return ERR(fmt::format("Invalid tile entity: Field '{}' is missing ({})", field, mc::stringifyNbt(compound)));
+            }
+            auto *id = &compound.get<std::string>("id")->value;
+            mc::stripMinecraftNamespace(id);
+
+            const auto type = registry.tileEntityId(*id);
+            if (type == mc::MISSING_TILE_ENTITY_TYPE)
+                return ERR(fmt::format("Invalid tile entity: Unresolved ID '{}'", *id));
+
             const auto x = compound.read<int32_t>("x");
             const auto y = compound.read<int32_t>("y") - static_cast<int32_t>(SEGMENT_SIDELENGTH_BLOCKS * minSectionY);
             const auto z = compound.read<int32_t>("z");
@@ -65,7 +78,7 @@ namespace zvcr {
 
     auto createZVCRRegion(const mc::MinecraftRegistry &registry, const DimensionType dimensionType,
                           const mc::anvil::Region &mcRegion, Region &region,
-                          const result::Option<time_t> &epochOverride) -> void {
+                          const result::Option<time_t> &epochOverride) -> ErrorMessage {
         for (uint8_t x = 0; x < mc::anvil::REGION_SIDELENGTH_CHUNKS; x++) {
             for (uint8_t z = 0; z < mc::anvil::REGION_SIDELENGTH_CHUNKS; z++) {
                 if (!mcRegion.hasChunkViewAt(x, z)) continue;
@@ -73,9 +86,10 @@ namespace zvcr {
                 const auto &chunkView = mcRegion.chunkViewAt(x, z);
                 const auto timestamp = epochOverride.value_or(static_cast<time_t>(chunkView.timestamp));
                 const auto chunkNBT = mcRegion.readChunkNbtAt(x, z);
-                const auto segment = createZVCRSegment(registry, dimensionType, chunkNBT, timestamp);
+                const auto segment = TRY(createZVCRSegment(registry, dimensionType, chunkNBT, timestamp));
                 region.set(x, z, segment);
             }
         }
+        return {};
     }
 }
